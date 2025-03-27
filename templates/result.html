@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>File receiver : Result</title>
+    </head>
+    <body>
+        <h1>File uploaded successfully</h1>
+        <table border="1">
+            <tr>
+                <th>Word</th>
+                <th>TF</th>
+                <th>IDF</th>
+            </tr>
+            {% for item in result %}
+            <tr>
+                <td>{{ item.word }}</td>
+                <td>{{ item.tf }}</td>
+                <td>{{ item.idf }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
