@@ -21,13 +21,14 @@ def result_view(request: HttpRequest):
         total_words = len(words) # Total words
         word_counts = Counter(words) # Dictionary of words and counts
         
-        total_docs = len(content)
+        total_docs = len(content) # Total documents
         
         result = []
         for word, count in word_counts.items():
-            tf = count / total_words
+            tf = count / total_words # Term frequency
             doc_count = sum(1 for line in content if word in line)
-            idf = math.log((total_docs + 1) / (doc_count + 1))
-            result.append(Word(word=word, tf=tf, idf=idf))
-        
+            idf = math.log((total_docs + 1) / (doc_count + 1)) + 1 # Inverse document frequency
+            result.append(Word(word=word, tf=tf, idf=idf)) # Append to result list
+
+            result = sorted(result, key=lambda x: x.idf, reverse=True) # Sort by idf in descending order
         return render(request, 'result.html', {'result': result})
